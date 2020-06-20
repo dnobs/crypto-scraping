@@ -1,0 +1,53 @@
+# don't forget chmod 755 [filename]
+
+################################################################################
+# START SSH CONNECTION, USING THE LOGIN
+
+# remote server
+# depending on linux type
+sudo apt install openssh-server
+sudo systemctl status ssh
+systemctrl start ssh
+ip a (look for inet)
+
+# look for port 22)
+sudo lsof -i -P -n | grep LISTEN
+
+# if it's not open
+sudo ufw allow 22
+
+# from remote computer, login
+ssh [user]@[ip-address]
+
+# copy files
+scp [from_path] [to_path]
+
+################################################################################
+# MAKE CONNECTION MORE SECURE WITH SSH KEYS
+
+# local machine
+# create keys
+ssh-keygen
+
+# copy keys to remote server
+ssh-copy-id [user]@[remote-ip]
+
+# disable password login on remote server
+sudo vim /etc/ssh/sshd_config
+
+# chage line (uncomment and change to no):
+PasswordAuthentication no
+
+# restart the ssh server
+sudo systemctl restart ssh
+
+
+################################################################################
+# set caps-lock to escape
+setxkbmap -option caps:escape
+
+################################################################################
+# Copy the folder of scripts & data, start the script
+# This is done on local machine
+cd ~
+scp -rp [local_path] [user@pi]:[remote_path]
