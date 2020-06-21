@@ -43,8 +43,18 @@ sudo systemctl restart ssh
 
 
 ################################################################################
+# PERSONALIZATION
 # set caps-lock to escape
 setxkbmap -option caps:escape
+
+################################################################################
+# INSTALL PROGRAMS
+sudo apt-get install python 3.7
+sudo apt-get install python3-pip
+pip3 install -r requirements.txt
+
+# needed for raspberry pi, for numpy compatibility
+sudo apt-get install libatlas-base-dev
 
 ################################################################################
 # Copy the folder of scripts & data, start the script
