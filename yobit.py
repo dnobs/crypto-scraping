@@ -1,8 +1,6 @@
 import json
 import requests
 import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
 import time
 import pickle
 from datetime import datetime
