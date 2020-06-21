@@ -13,12 +13,14 @@ def yobit_req(method, pair_list=''):
     success = False
     while success == False:
         try:
-            time.sleep(60/90) # to avoid overloading the api, which is limited to 100 requests / min
             response = requests.get(req).json()
+            time.sleep(60/90) # to avoid overloading the api, which is limited to 100 requests / min
             success = True
+
         except Exception as e:
             print('\nconnection error: ' + str(e))
             print('will try again soon..')
+            sys.stdout.flush() # forces to write when running in background
             time.sleep(10)
 
     return response
@@ -101,10 +103,12 @@ def init_master(fetch_new=False):
         pickle.dump(master, open('master.pkl', 'wb'))
     else:
         print('loading master from pickle')
+        sys.stdout.flush() # forces to write when running in background
 
         try:
             master = pickle.load(open('master.pkl', 'rb'))
         except FileNotFoundError:
             print('unable to find saved data, fetching new data')
+            sys.stdout.flush() # forces to write when running in background
             master = init_master(fetch_new=True) # recursive call to self
     return master
