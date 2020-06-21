@@ -4,7 +4,7 @@ import pandas as pd
 import time
 import pickle
 from datetime import datetime
-
+import sys
 
 
 def yobit_req(method, pair_list=''):
